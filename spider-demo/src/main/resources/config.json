@@ -1,0 +1,6 @@
+{
+  "host": "邮箱服务器，比如：smtp.163.com",
+  "username" : "163邮箱账号",
+  "password" : "163邮箱密码",
+  "partNumbers": "多个型号逗号分割，比如：AM6526BACDXA,AM6526BACDXEAF"
+}
