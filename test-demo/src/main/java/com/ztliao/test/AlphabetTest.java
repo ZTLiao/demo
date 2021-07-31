@@ -5,7 +5,7 @@ package com.ztliao.test;
  * @date: 2021/7/19 9:05 PM
  * @description:
  */
-public class TestMain {
+public class AlphabetTest {
 
     /**
      * 进位
