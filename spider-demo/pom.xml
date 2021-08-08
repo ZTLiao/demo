@@ -64,6 +64,23 @@
             <artifactId>mail</artifactId>
             <version>1.4</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.0.0-alpha-7</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>4.3.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.codeborne/phantomjsdriver -->
+        <!--<dependency>-->
+            <!--<groupId>com.codeborne</groupId>-->
+            <!--<artifactId>phantomjsdriver</artifactId>-->
+            <!--<version>1.4.4</version>-->
+        <!--</dependency>-->
     </dependencies>
 
     <build>
