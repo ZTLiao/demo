@@ -140,16 +140,17 @@ public class TexasServiceImpl implements TexasService {
     public List<Inventory> search(List<String> partNumbers) {
         List<Inventory> inventories = new ArrayList<>();
         try {
-            OpnListDto opnListDto = TexasUtils.getInventory(partNumbers);
-            assert opnListDto != null;
-            List<InventoryDto> opnList = opnListDto.getOpn_list();
-            assert opnList != null && !opnList.isEmpty();
-            for (InventoryDto inventoryDto : opnList) {
+            for (int i = 0, len = partNumbers.size(); i < len; i++) {
+                String opn = partNumbers.get(i);
+                InventoryDto inventoryDto = TexasUtils.opnInventory(opn);
                 Inventory inventory = new Inventory();
                 inventory.setPartNumber(inventoryDto.getOrderable_number());
-                inventory.setQuantity(inventoryDto.getQuantity());
+                inventory.setQuantity(inventoryDto.getInventory());
                 inventoryMapper.insert(inventory);
                 inventories.add(inventory);
+                log.info("开始等候10秒...");
+                Thread.sleep(10 * 1000);
+                log.info("结束等候10秒...");
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);

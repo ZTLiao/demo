@@ -5,10 +5,8 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.XmlUtil;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
-import com.ztliao.spider.domain.dto.OpnListDto;
-import com.ztliao.spider.domain.dto.ParametricResultDto;
-import com.ztliao.spider.domain.dto.ParametricResultsDto;
-import com.ztliao.spider.domain.dto.RssDto;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.ztliao.spider.domain.dto.*;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -73,5 +71,12 @@ public class TexasUtils {
         OpnListDto opnListDto = JSONUtil.toBean(HttpUtil.post("https://www.ti.com.cn/storeservices/cart/inventory", JSONUtil.toJsonStr(qgpns)), OpnListDto.class);
         assert opnListDto != null;
         return opnListDto;
+    }
+
+    public static InventoryDto opnInventory(String opn) {
+        assert StringUtils.isNotEmpty(opn);
+        InventoryDto inventoryDto = JSONUtil.toBean(HttpUtil.get("https://www.ti.com/storeservices/cart/opninventory?opn=" + opn), InventoryDto.class);
+        assert inventoryDto != null;
+        return inventoryDto;
     }
 }

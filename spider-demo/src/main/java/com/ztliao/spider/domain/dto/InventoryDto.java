@@ -15,4 +15,6 @@ public class InventoryDto {
     private Integer quantity;
 
     private String purchase_flag;
+
+    private Integer inventory;
 }
