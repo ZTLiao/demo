@@ -39,7 +39,7 @@ object WindowTest {
       .keyBy(_._1)
       //        .window(TumblingEventTimeWindows.of(Time.seconds(15)))
       //        .window(SlidingEventTimeWindows.of(Time.seconds(15), Time.seconds(3)))
-      //      .countWindow(15)
+     //.countWindow(15)
       .timeWindow(Time.seconds(15))
       .allowedLateness(Time.minutes(1))
       .sideOutputLateData(latetag)
