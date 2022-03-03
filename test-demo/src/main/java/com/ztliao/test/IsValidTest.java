@@ -13,7 +13,7 @@ public class IsValidTest {
         s = "()";
         s = "(]";
         s = "([)]";
-        s = "({{{{}}}))";
+        s = "1 + (1 - 2)";
         boolean isValid = false;
         SolutionStack stack = new SolutionStack();
         for (int i = 0, len = s.length(); i < len; i++) {
@@ -26,7 +26,7 @@ public class IsValidTest {
                 System.out.println("c1 = " + c1 + ", c0 = " + c0);
                 isValid = (c1 == '(' && c0 == ')') || (c1 == '[' && c0 == ']') || (c1 == '{' && c0 == '}');
                 if (!isValid) {
-                    System.out.println("isValid = " + isValid);
+                    break;
                 }
             }
             System.out.println(stack.toString());
