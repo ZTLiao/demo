@@ -2,7 +2,6 @@ package com.ztliao.test;
 
 import com.ztliao.conditions.query.QueryWrapper;
 import com.ztliao.conditions.wrapper.Wrappers;
-import org.junit.Test;
 
 /**
  * @author: liaozetao
@@ -11,11 +10,11 @@ import org.junit.Test;
  */
 public class SqlTest {
 
-    @Test
-    public void test01() {
+    public static void main(String[] args) {
         QueryWrapper<String> queryWrapper = Wrappers.<String>query("select * from test where 1 = 1")
                 .eq("value", "hello world");
         System.out.println(queryWrapper.getSqlSegment());
         System.out.println(queryWrapper.getConditions());
     }
+
 }
