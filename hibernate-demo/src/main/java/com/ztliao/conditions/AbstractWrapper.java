@@ -14,7 +14,7 @@ import net.sf.jsqlparser.parser.CCJSqlParserUtil;
 import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.schema.Table;
 import net.sf.jsqlparser.statement.Statement;
-import net.sf.jsqlparser.statement.select.PlainSelect;
+import net.sf.jsqlparser.statement.select.*;
 
 import java.util.*;
 import java.util.function.BiPredicate;
@@ -132,7 +132,7 @@ public abstract class AbstractWrapper<T, R, Children extends AbstractWrapper<T, 
     public <V> Children allEq(boolean condition, Map<R, V> params, boolean null2IsNull) {
         if (condition && CollectionUtil.isNotEmpty(params)) {
             params.forEach((k, v) -> {
-                if (ObjectUtil.isNotEmpty(v)) {
+                if (ObjectUtil.isNotNull(v)) {
                     eq(k, v);
                 } else {
                     if (null2IsNull) {
@@ -149,7 +149,7 @@ public abstract class AbstractWrapper<T, R, Children extends AbstractWrapper<T, 
         if (condition && CollectionUtil.isNotEmpty(params)) {
             params.forEach((k, v) -> {
                 if (filter.test(k, v)) {
-                    if (ObjectUtil.isNotEmpty(v)) {
+                    if (ObjectUtil.isNotNull(v)) {
                         eq(k, v);
                     } else {
                         if (null2IsNull) {
