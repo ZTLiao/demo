@@ -1,0 +1,21 @@
+debug: false
+
+server:
+    port: 8080
+
+spring:
+  datasource:
+    driver-class-name: org.sqlite.JDBC
+    url: jdbc:sqlite::resource:static/texas.db
+    username:
+    password:
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*Mapper.xml
+  configuration:
+    lazyLoadingEnabled: false
+    # log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    banner: false
+    db-config:
+      table-underline: true
