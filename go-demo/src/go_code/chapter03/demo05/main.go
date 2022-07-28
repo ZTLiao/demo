@@ -66,4 +66,37 @@ func main() {
 	num9 := 5.1234e2
 	num10 := 5.1234e-2
 	fmt.Println("num8 = ", num8, "num9 =", num9, "num10 = ", num10)
+
+	var c1 byte = 'a'
+	var c2 byte = '0'
+
+	fmt.Println("c1 = ", c1, "c2 = ", c2)
+	fmt.Printf("c1 = %c, c2 = %c\n", c1, c2)
+
+	var c3 int = '北'
+	fmt.Printf("c3 = %c, c3 = %d\n", c3, c3)
+
+	var c4 int = 22269
+	fmt.Printf("c4 = %c\n", c4)
+
+	var n10 = 10 + 'a'
+	fmt.Println("n10 = ", n10)
+
+	var bl = false
+	fmt.Println("bl = ", bl, "unsafe.Sizeof(bl) = ", unsafe.Sizeof(bl))
+
+	var addr string = "广州"
+
+	fmt.Println("addr = ", addr)
+
+	var str = "hello"
+
+	//str[0] = 'a'
+	fmt.Println("str = ", str)
+
+	str3 := "abc\nabc"
+	fmt.Print("str3 = ", str3)
+
+	str4 := `test hello world`
+	fmt.Println("str4 = ", str4)
 }
