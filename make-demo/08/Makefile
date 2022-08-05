@@ -1,0 +1,5 @@
+frobnicate:
+	echo frobnicate
+
+%:
+	echo $@ 

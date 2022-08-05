@@ -1,0 +1,1 @@
+#define HACK "hack.h"
