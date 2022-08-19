@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <assert.h>
+
+#define uint32_t unsigned int
 
 void func(int argv, char* argc[]) {
 	int* p = (int*) argc;
@@ -44,6 +47,17 @@ void func06() {
 	JUST_MOV(foo);
 }
 
+void func07(uint32_t dwSomeValue) {
+	uint32_t dwRes;
+	asm (
+	"bsfl %1,%0"
+	: "=r" (dwRes)
+	: "r" (dwSomeValue)
+	: "cc"
+	);
+	assert(dwRes > 3);
+}
+
 int main(int argv, char* argc[]) {
 	func(argv, argc);
 	func01();
@@ -52,5 +66,6 @@ int main(int argv, char* argc[]) {
 	func04(argv, argc);
 	func05(argv, argc);
 	func06();
+	func07(1);
 	return 0;
 }
