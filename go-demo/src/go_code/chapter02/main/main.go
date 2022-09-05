@@ -26,4 +26,6 @@ func main() {
 	fmt.Println("sum = ", sum)
 	res1, res2 := getSumAndSub(1, 2)
 	fmt.Println("res1 = ", res1, "res2 = ", res2)
+	res3, _ := getSumAndSub(1, 2)
+	fmt.Println("res3 = ", res3)
 }
