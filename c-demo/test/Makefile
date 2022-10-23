@@ -1,5 +1,7 @@
 .PHONY: clean
 
+CFLAGS := -ggdb
+
 %: %.o
 	@echo $@
 	@$(CC) $(CFLAGS) -c -o $@ $<
