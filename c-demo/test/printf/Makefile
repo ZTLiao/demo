@@ -7,7 +7,7 @@ BASENAME := $(shell pwd)
 
 INCLUDES := $(BASENAME)/include
 
-CFLAGS += -O2 -MMD -Wall -Werror -ggdb3 -I$(INCLUDES)
+CFLAGS += -O0 -MMD -Wall -Werror -ggdb3 -I$(INCLUDES)
 SRCS = $(shell find src/ -name "*.c")
 OBJS = $(SRCS:src/%.c=build/%.o)
 

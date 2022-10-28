@@ -40,7 +40,7 @@ public class SignUtil {
             }
             sb.append("&key=").append(key);
             System.out.println(" params : " + sb);
-            return SecureUtil.md5(sb.toString()).toUpperCase();
+            return MD5Util.getMD5String(sb.toString()).toUpperCase();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -75,5 +75,7 @@ public class SignUtil {
         String str = "request_secret_key=579020b20ba9a8d8&uid=96101293&key=a621c27f579020b20ba9a8d82ddf8130";
         String s = SecureUtil.md5(str).toUpperCase();
         System.out.println(s);
+        String s1 = MD5Util.getMD5String(str).toUpperCase();
+        System.out.println(s1);
     }
 }
