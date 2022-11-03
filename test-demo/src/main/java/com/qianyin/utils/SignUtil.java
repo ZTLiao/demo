@@ -57,19 +57,9 @@ public class SignUtil {
 
     public static void main(String[] args) {
         Map params = new HashMap();
-        params.put("newDeviceId", "YwQzm9CmIZ0DAIYCXqgk7RL5");
-        params.put("appVersionCode", "91");
-        params.put("os", "android");
-        params.put("app", "duoduokaihei");
-        params.put("uid", "96101293");
-        params.put("model", "JSN-AL00");
-        params.put("channel", "official");
-        params.put("deviceId", "79363fbc-71c8-33c3-9dd5-5325fa44a28a");
-        params.put("appVersion", "3.0.0");
-        params.put("osVersion", "8.1.0");
-        params.put("netType", "2");
-        params.put("ispType", "4");
-        params.put("request_secret_key", "579020b20ba9a8d8");
+        params.put("pub_timestamp", "1667460047000");
+        params.put("roomUid", "90304899");
+        params.put("uid", "90304899");
         String sign = SignUtil.genSign(params, "a621c27f579020b20ba9a8d82ddf8130");
         System.out.println("sign = " + sign);
         String str = "request_secret_key=579020b20ba9a8d8&uid=96101293&key=a621c27f579020b20ba9a8d82ddf8130";
