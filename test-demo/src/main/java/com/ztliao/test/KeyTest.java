@@ -1,7 +1,5 @@
 package com.ztliao.test;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-
 import java.util.Random;
 
 /**
@@ -26,10 +24,15 @@ public class KeyTest {
     };
 
     public static void main(String[] args) {
-        String str = "1ea53d260ecf11e7b56e00163e046a26";
-        String encrypt = encrypt1(str);
-        System.out.println(encrypt);
-        System.out.println(decrypt1(encrypt));
+        for (long i = 0; i < Long.MAX_VALUE; i++) {
+            String str = "1ea53d260ecf11e7b56e00163e046a26";
+            String str1 = encryptSign(str);
+            String str2 = decryptSign(encryptSign(str));
+            System.out.println("原文 : " + str);
+            System.out.println("加密 : " + str1);
+            System.out.println("解密 : " + str2);
+            assert str.equals(str2);
+        }
     }
 
     private static String encrypt(String key) {
@@ -75,22 +78,29 @@ public class KeyTest {
         return new String(keyArray);
     }
 
-    private static String encrypt1(String key) {
+    public static String encryptSign(String key) {
         Random random = new Random();
         byte[] keyArray = key.getBytes();
-        byte[] uuidArray = new byte[32 * (keyArray.length / 4)];
-        for (int i = 0, len = keyArray.length / 4; i < len; i++) {
-            for (int j = 0, k = 7, l = 0; j < 32; j++) {
-                int j1 = random.nextInt(2);
-                int j2 = random.nextInt(j1 == 0 ? 26 : 10);
-                uuidArray[i * 32 + j] = (byte) (j2 + (j1 == 0 ? 97 : 48));
-                System.out.println("keyArray[" + (i * 4 + l) + "] = " + keyArray[i * 4 + l]);
-                if ((keyArray[i * 4 + l] & (1 << k)) == 0) {
-                    uuidArray[i * 32 + j] &= (byte) ((keyArray[i * 4 + l] | ~(1 << k)) & 0xFF);
-                } else {
-                    uuidArray[i * 32 + j] |= (1 << k);
+        int word = 32;
+        int size = keyArray.length / 4;
+        byte[] encryptArray = new byte[word * size];
+        for (int i = 0; i < size; i++) {
+            int step = i * word;
+            for (int j = 0, k = 7, l = 0; j < word; j++) {
+                byte temp = encryptArray[step + j];
+                int b = 1;
+                while (b == 1 || temp == 34) {
+                    b = 0;
+                    int r1 = random.nextInt(2);
+                    int r2 = random.nextInt(r1 == 0 ? 26 : 10);
+                    temp = (byte) (r2 + (r1 == 0 ? 97 : 48));
+                    if ((keyArray[i * 4 + l] & (1 << k)) == 0) {
+                        temp &= (byte) ((keyArray[i * 4 + l] | ~(1 << k)) & 0xFF);
+                    } else {
+                        temp |= (1 << k);
+                    }
                 }
-                System.out.println("uuidArray[" + (i * 32 + j) + "] = " + Integer.toBinaryString(uuidArray[i * 32 + j]));
+                encryptArray[step + j] = temp;
                 if (k == 0) {
                     k = 7;
                     l++;
@@ -99,14 +109,14 @@ public class KeyTest {
                 }
             }
         }
-        System.out.println(ReflectionToStringBuilder.toString(uuidArray));
-        return new String(uuidArray);
+        return new String(encryptArray);
     }
 
-    private static String decrypt1(String encrypt) {
-        byte[] keyArray = new byte[32];
+    public static String decryptSign(String encrypt) {
         byte[] encryptArray = encrypt.getBytes();
-        for (int i = 0, len = encryptArray.length / 8; i < len; i++) {
+        int size = encryptArray.length / 8;
+        byte[] keyArray = new byte[size];
+        for (int i = 0; i < size; i++) {
             int step = i * 8;
             keyArray[i] |= encryptArray[step] & 128;
             keyArray[i] |= encryptArray[step + 1] & 64;
