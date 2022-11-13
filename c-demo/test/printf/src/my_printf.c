@@ -1,5 +1,6 @@
 #include "my_printf.h"
 #include <stdio.h>
+#include <stdarg.h>
 
 int my_putchar(int c) {
 	unsigned char ch = c;
@@ -74,6 +75,11 @@ int my_printf(const char* template, ...) {
 				case 'A':
 				break;
 				case 'c':
+                 {
+                     int c = my_va_arg(ap, int);
+                      char *ascii = " !\"#$\%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+                      my_putchar(ascii[c - 32]);
+                 }
 				break;
 				case 'C':
 				break;
@@ -132,3 +138,4 @@ int my_itoa(int n, char *buffer) {
 	buffer[len] = 0;
 	return len;
 }
+
