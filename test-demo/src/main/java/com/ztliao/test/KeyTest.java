@@ -24,10 +24,21 @@ public class KeyTest {
     };
 
     public static void main(String[] args) {
+        Random random = new Random();
         for (long i = 0; i < Long.MAX_VALUE; i++) {
-            String str = "1ea53d260ecf11e7b56e00163e046a26";
+            int num = random.nextInt(32);
+            byte[] bytes = new byte[num];
+            for (int j = 0; j < num; j++) {
+                int j1 = random.nextInt(2);
+                int j2 = random.nextInt(j1 == 0 ? 26 : 10);
+                bytes[j] = aa[j1][j2];
+            }
+            String str = new String(bytes);
+            long start = System.currentTimeMillis();
             String str1 = encryptSign(str);
-            String str2 = decryptSign(encryptSign(str));
+            long end = System.currentTimeMillis();
+            System.out.println("encryptSign time is : " + (end - start));
+            String str2 = decryptSign(str1);
             System.out.println("原文 : " + str);
             System.out.println("加密 : " + str1);
             System.out.println("解密 : " + str2);
@@ -78,34 +89,29 @@ public class KeyTest {
         return new String(keyArray);
     }
 
+    private static long next = System.currentTimeMillis();
+
+    private static int rand(int bound) {
+        next = next * 1103515245 + 12345;
+        long rand = (next / 65536) % 32768;
+        return (int) ((rand < 0 ? -rand : rand) % bound);
+    }
+
     public static String encryptSign(String key) {
-        Random random = new Random();
         byte[] keyArray = key.getBytes();
-        int word = 32;
-        int size = keyArray.length / 4;
-        byte[] encryptArray = new byte[word * size];
-        for (int i = 0; i < size; i++) {
+        int length = keyArray.length;
+        int word = 8;
+        byte[] encryptArray = new byte[length * word];
+        for (int i = 0; i < length; i++) {
             int step = i * word;
-            for (int j = 0, k = 7, l = 0; j < word; j++) {
-                byte temp = encryptArray[step + j];
-                int b = 1;
-                while (b == 1 || temp == 34) {
-                    b = 0;
-                    int r1 = random.nextInt(2);
-                    int r2 = random.nextInt(r1 == 0 ? 26 : 10);
-                    temp = (byte) (r2 + (r1 == 0 ? 97 : 48));
-                    if ((keyArray[i * 4 + l] & (1 << k)) == 0) {
-                        temp &= (byte) ((keyArray[i * 4 + l] | ~(1 << k)) & 0xFF);
-                    } else {
-                        temp |= (1 << k);
-                    }
-                }
-                encryptArray[step + j] = temp;
-                if (k == 0) {
-                    k = 7;
-                    l++;
+            for (int j = 0, k = word - 1; j < word; j++, k--) {
+                int r1 = rand(2);
+                int r2 = rand(r1 == 0 ? 26 : 10);
+                encryptArray[step + j] = (byte) (r2 + (r1 == 0 ? 97 : 48));
+                if ((keyArray[i] & (1 << k)) == 0) {
+                    encryptArray[step + j] &= (byte) ((keyArray[i] | ~(1 << k)) & 0xFF);
                 } else {
-                    k--;
+                    encryptArray[step + j] |= (1 << k);
                 }
             }
         }
