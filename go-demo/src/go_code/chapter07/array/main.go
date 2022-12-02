@@ -43,6 +43,32 @@ func main() {
 
 	test01(numArr01)
 	test02(&numArr01)
+
+	var myChars [26]byte
+	for i := 0; i < 26; i++ {
+		myChars[i] = 'A' + byte(i)
+	}
+	for i := 0; i < 26; i++ {
+		fmt.Printf("%c", myChars[i])
+	}
+
+	var intArr [5]int = [...]int{1, -1, 9, 90, 11}
+	maxVal := intArr[0]
+	maxValIndex := 0
+	for i := 1; i < len(intArr); i++ {
+		if maxVal < intArr[i] {
+			maxVal = intArr[i]
+			maxValIndex = i
+		}
+	}
+	fmt.Printf("maxValIndex = %v, maxVal = %v\n", maxValIndex, maxVal)
+
+	var intArr2 [5]int = [...]int{1, 2, 3, 4, 5}
+	sum := 0
+	for _, val := range intArr2 {
+		sum += val
+	}
+	fmt.Printf("sum = %v, avg = %v\n", sum, sum/len(intArr2))
 }
 
 func test01(arr [3]int) {
