@@ -26,12 +26,9 @@ int my_sys_write(int fd, const void *buf, int count) {
 	return (int) _ret;
 }
 
-int my_printf(const char* template, ...) {
-	my_va_list ap;
-	my_va_start(ap, template);
+int my_vsprintf(char *out, const char *fmt, my_va_list ap) {
 	int written = 0;
 	char tmpbuf[21];
-	char *fmt = (char *)ap.fmt;
 	while (*fmt) {
 		if (*fmt == '%') {
 			fmt++;
@@ -39,12 +36,12 @@ int my_printf(const char* template, ...) {
 				case 'd': 
 				case 'i':
 				{
-					char *out = tmpbuf;
+					char *buffer = tmpbuf;
 					int var = my_va_arg(ap, int);
-					int len = my_itoa(var, out);
+					int len = my_itoa(var, tmpbuf);
 					int i = 0;
 					while (i < len) {
-						my_putchar(out[i++]);
+					  out[written++] = buffer[i++];	
 					}
 				}
 				break;
@@ -77,8 +74,8 @@ int my_printf(const char* template, ...) {
 				case 'c':
                  {
                      int c = my_va_arg(ap, int);
-                      char *ascii = " !\"#$\%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
-                      my_putchar(ascii[c - 32]);
+                     char *ASCII = " !\"#$\%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+					 out[written++] = ASCII[c - 32];
                  }
 				break;
 				case 'C':
@@ -87,8 +84,7 @@ int my_printf(const char* template, ...) {
 				{
 					char *buffer = my_va_arg(ap, char *);
 					while (*buffer) {
-						my_putchar(*buffer);
-						buffer++;
+						out[written++] = *(buffer++);
 					}
 				}
 				break;
@@ -102,13 +98,26 @@ int my_printf(const char* template, ...) {
 				break;
 				case '%':
 				default:
-					my_putchar(*fmt);
+				  out[written++] = *fmt;
 				break;
 			}
 		} else {
-			my_putchar(*fmt);
+			out[written++] = *fmt;
 		}
 		fmt++;
+	}
+  return written;
+}
+
+int my_printf(const char* fmt, ...) {
+	my_va_list ap;
+	my_va_start(ap, fmt);
+	char buffer[128];
+	int written = my_vsprintf(buffer, fmt, ap);
+	char *tmpbuf = buffer;
+	int i = 0;
+	while (i < written) {
+	  my_putchar(tmpbuf[i++]);
 	}
 	my_va_end(ap);
 	return written;
@@ -135,7 +144,7 @@ int my_itoa(int n, char *buffer) {
 			buffer[len++] = '0' + i;
 		}
 	} while(pos--);
-	buffer[len] = 0;
+	buffer[len] = '\0';
 	return len;
 }
 

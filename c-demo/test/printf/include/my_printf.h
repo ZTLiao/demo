@@ -45,7 +45,9 @@ int my_putchar(int c);
 
 int my_sys_write(int fd, const void *buf, int count);
 
-int my_printf(const char* template, ...);
+int my_vsprintf(char *out, const char *fmt, my_va_list ap);
+
+int my_printf(const char* fmt, ...);
 
 int my_itoa(int n, char *buffer);
 
