@@ -24,26 +24,32 @@ public class KeyTest {
     };
 
     public static void main(String[] args) {
-        Random random = new Random();
-        for (long i = 0; i < Long.MAX_VALUE; i++) {
-            int num = random.nextInt(32);
-            byte[] bytes = new byte[num];
-            for (int j = 0; j < num; j++) {
-                int j1 = random.nextInt(2);
-                int j2 = random.nextInt(j1 == 0 ? 26 : 10);
-                bytes[j] = aa[j1][j2];
-            }
-            String str = new String(bytes);
-            long start = System.currentTimeMillis();
-            String str1 = encryptSign(str);
-            long end = System.currentTimeMillis();
-            System.out.println("encryptSign time is : " + (end - start));
-            String str2 = decryptSign(str1);
-            System.out.println("原文 : " + str);
-            System.out.println("加密 : " + str1);
-            System.out.println("解密 : " + str2);
-            assert str.equals(str2);
-        }
+//        Random random = new Random();
+//        for (long i = 0; i < Long.MAX_VALUE; i++) {
+//            int num = random.nextInt(32);
+//            byte[] bytes = new byte[num];
+//            for (int j = 0; j < num; j++) {
+//                int j1 = random.nextInt(2);
+//                int j2 = random.nextInt(j1 == 0 ? 26 : 10);
+//                bytes[j] = aa[j1][j2];
+//            }
+//            String str = new String(bytes);
+//            long start = System.currentTimeMillis();
+//            String str1 = encryptSign(str);
+//            long end = System.currentTimeMillis();
+//            System.out.println("encryptSign time is : " + (end - start));
+//            String str2 = decryptSign(str1);
+//            System.out.println("原文 : " + str);
+//            System.out.println("加密 : " + str1);
+//            System.out.println("解密 : " + str2);
+//            assert str.equals(str2);
+//        }
+        String str = "{\"data\":200,\"msg\":\"success\"}";
+        String encrypt = encryptSign(str);
+        String decrypt = decryptSign(encrypt);
+        System.out.println("encrypt : " + encrypt);
+        System.out.println("decrypt : " + decrypt);
+        assert encrypt.equals(decrypt);
     }
 
     private static String encrypt(String key) {
