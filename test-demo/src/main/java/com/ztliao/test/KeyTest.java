@@ -44,12 +44,15 @@ public class KeyTest {
 //            System.out.println("解密 : " + str2);
 //            assert str.equals(str2);
 //        }
-        String str = "{\"data\":200,\"msg\":\"success\"}";
-        String encrypt = encryptSign(str);
-        String decrypt = decryptSign(encrypt);
-        System.out.println("encrypt : " + encrypt);
-        System.out.println("decrypt : " + decrypt);
-        assert encrypt.equals(decrypt);
+
+        String key = encryptSign("4r2vskf2267swgksyyg9k6qzdg91axdh");
+        System.out.println(decryptSign("f2m4pkxm5uz!45i3wu0#g01y9&99758uz70xc8216zt`55pr41g70868o:a155s4m+05f`0bmrm!1|0o4hp`fc63cihlf5ods2vzc9h1y/xz1zxmrklf2v473316072k1s7br92j7!dp07`c76twd|683p9dcvmef12vgkh25\"6z03m8r,z3bcyki390142bs3rzps6g1y6da<is2.1xt854i(2qr78431303e3`1nb`58tuw13610{bk9lyd6c0"));
+//        String str = "{\"data\":200,\"msg\":\"success\"}";
+//        String encrypt = encryptSign(str);
+//        String decrypt = decryptSign(encrypt);
+//        System.out.println("encrypt : " + encrypt);
+//        System.out.println("decrypt : " + decrypt);
+//        assert encrypt.equals(decrypt);
     }
 
     private static String encrypt(String key) {

@@ -1,6 +1,7 @@
 package com.qianyin.utils;
 
 import cn.hutool.crypto.SecureUtil;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.*;
 
@@ -40,7 +41,7 @@ public class SignUtil {
             }
             sb.append("&key=").append(key);
             System.out.println(" params : " + sb);
-            return MD5Util.getMD5String(sb.toString()).toUpperCase();
+            return DigestUtils.md5Hex(sb.toString()).toUpperCase();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -56,16 +57,11 @@ public class SignUtil {
     }
 
     public static void main(String[] args) {
-        Map params = new HashMap();
+        Map<String, String> params = new HashMap<>();
         params.put("pub_timestamp", "1667460047000");
         params.put("roomUid", "90304899");
         params.put("uid", "90304899");
-        String sign = SignUtil.genSign(params, "a621c27f579020b20ba9a8d82ddf8130");
+        String sign = SignUtil.genSign(params, "1ea53d260ecf11e7b56e00163e046a26");
         System.out.println("sign = " + sign);
-        String str = "request_secret_key=579020b20ba9a8d8&uid=96101293&key=a621c27f579020b20ba9a8d82ddf8130";
-        String s = SecureUtil.md5(str).toUpperCase();
-        System.out.println(s);
-        String s1 = MD5Util.getMD5String(str).toUpperCase();
-        System.out.println(s1);
     }
 }

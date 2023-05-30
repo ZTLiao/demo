@@ -170,3 +170,23 @@ int check_sums(int *A, int length, int x) {
   }
   return 0;
 }
+
+
+void merge_v3(int *A, int p, int q, int r) {
+  int n = r - q + 1;
+  int t[n];
+  int i, j;
+  for (i = 0; i < n; i++) {
+    t[i] = A[p + i];
+  }
+}
+
+void merge_sort_v3(int *A, int p, int r) {
+  if (p <= r) {
+    int q = (p + r) / 2;
+    merge_sort_v3(A, p, q);
+    merge_sort_v3(A, q + 1, r);
+    merge_v3(A, p, q, r);
+  }
+}
+
