@@ -63,5 +63,7 @@ public class SignUtil {
         params.put("uid", "90304899");
         String sign = SignUtil.genSign(params, "1ea53d260ecf11e7b56e00163e046a26");
         System.out.println("sign = " + sign);
+        System.out.println("md5 = " + DigestUtils.md5Hex("pub_timestamp=1685517186776&uid=0&key=4r2vskf2267swgksyyg9k6qzdg91axd8").toUpperCase());
+        System.out.println("123 = " + DigestUtils.md5Hex("1234abcd").toUpperCase());
     }
 }

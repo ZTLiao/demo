@@ -52,7 +52,6 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>qianyin-sign</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>

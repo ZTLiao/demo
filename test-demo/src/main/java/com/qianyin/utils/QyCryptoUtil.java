@@ -10,7 +10,7 @@ import java.util.*;
 public class QyCryptoUtil {
 
     static {
-        System.load("/Users/liaozetao/IdeaProjects/demo/test-demo/src/main/resources/qyencryptlib-64.so");
+        System.load("/Users/liaozetao/IdeaProjects/demo/test-demo/src/main/resources/libqyencrypt.so");
     }
 
     public static native String genSignQy(Map<String, String> params, List<String> excludes, String key);
