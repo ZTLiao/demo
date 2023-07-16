@@ -13,7 +13,7 @@ public class QyCryptoUtil {
         System.load("/Users/liaozetao/IdeaProjects/demo/test-demo/src/main/resources/libqyencrypt.so");
     }
 
-    public static native String genSignQy(Map<String, String> params, List<String> excludes, String key);
+    private static native String genSignQy(Map<String, String> params, List<String> excludes, String key);
 
     public static native String decryptDesQy(String base64Text, String key);
 

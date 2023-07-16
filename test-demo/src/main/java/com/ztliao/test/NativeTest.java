@@ -5,6 +5,7 @@ import com.qianyin.utils.SignUtil;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @author: liaozetao
@@ -15,22 +16,23 @@ public class NativeTest {
 
     public static void main(String[] args) {
         //{pub_timestamp=1685517186776, uid=0}======null
-        for (int i = 0; i < 100000; i++) {
+//        System.out.println(QyCryptoUtil.decryptAesQy("iaJkbRL3D7ig8FFfae/5fwNVEiZDexlfYEE097KDlck=", "gl7n3g1dqftaed99"));
+        for (; ;) {
             String signPrivateKey = "f2m4pkxm5uz!45i3wu0#g01y9&99758uz70xc8216zt`55pr41g70868o:a155s4m+05f`0bmrm!1|0o4hp`fc63cihlf5ods2vzc9h1y/xz1zxmrklf2v473316072k1s7br92j7!dp07`c76twd|683p9dcvmef12vgkh25\"6z03m8r,z3bcyki390142bs3rzps6g1y6da<is2.1xt854i(2qr78431303e3`1nb`58tuw13610{bk9lyd6c0";
             Map<String, String> params = new HashMap<>();
             params.put("pub_timestamp", "1667460047000");
             params.put("roomUid", "90304899");
             params.put("uid", "90304899");
-            String signKey = QyCryptoUtil.genSignQy(params, SignUtil.PUBLIC_PARAMETER_NAMES, signPrivateKey);
+            String signKey = QyCryptoUtil.generateSignatureQy(params, SignUtil.PUBLIC_PARAMETER_NAMES, signPrivateKey);
             System.out.println("signKey : " + signKey);
             String privateKey = "n'84iqu735tx6v;quskev6186%6sy29453pu;884r0ky5=xgqv375=cv1gii7xlgt1680r9g60e|>3te6vi8;kz25xw2v375l79s6ggxm74q515nv!vsb40p3vn(=2ku";
             String plainText = "1234567890";
             String base64Text = QyCryptoUtil.encryptDesQy(plainText, privateKey);
             System.out.println("des text : " + base64Text);
-            System.out.println(QyCryptoUtil.decryptDesQy(base64Text, "97d885va19zs604k"));
+            System.out.println(QyCryptoUtil.decryptDesQy("MFQD72LvqNKsmuIxYEsXFA==", "97d885va19zs604k"));
             base64Text = QyCryptoUtil.encryptAesQy(plainText, privateKey);
             System.out.println("aes text : " + base64Text);
-            System.out.println(QyCryptoUtil.decryptAesQy(base64Text, "97d885va19zs604k"));
+            System.out.println(QyCryptoUtil.decryptAesQy("YLZaHhPIu49RBOXIpuMOWQ==", "97d885va19zs604k"));
         }
     }
 }

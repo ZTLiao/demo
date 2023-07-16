@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
 
 func main() {
 	var hens [6]float64
@@ -69,6 +73,20 @@ func main() {
 		sum += val
 	}
 	fmt.Printf("sum = %v, avg = %v\n", sum, sum/len(intArr2))
+	var intArr3 [5]int
+	len := len(intArr3)
+	rand.Seed(time.Now().UnixNano())
+	for i := 0; i < len; i++ {
+		intArr3[i] = rand.Intn(100)
+	}
+	fmt.Println("before arr = ", intArr3)
+	temp := 0
+	for i := 0; i < len/2; i++ {
+		temp = intArr3[len-1-i]
+		intArr3[len-1-i] = intArr3[i]
+		intArr3[i] = temp
+	}
+	fmt.Println("after arr = ", intArr3)
 }
 
 func test01(arr [3]int) {
