@@ -1,4 +1,4 @@
-package com.ztliao.mapreduce.writeable;
+package com.ztliao.mapreduce.writable;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;

@@ -1,4 +1,4 @@
-package com.ztliao.mapreduce.wordcount2;
+package com.ztliao.mapreduce.partitioner;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -32,7 +32,6 @@ public class WordCountDriver {
         //5.设置最终的输出kv类型
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
-        job.setNumReduceTasks(2);
         //6.设置输入路径和输出路径
         FileInputFormat.setInputPaths(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));

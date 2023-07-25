@@ -1,4 +1,4 @@
-package com.ztliao.mapreduce.writeable;
+package com.ztliao.mapreduce.partitioner2;
 
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
