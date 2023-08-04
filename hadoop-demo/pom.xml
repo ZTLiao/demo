@@ -12,6 +12,7 @@
     <modules>
         <module>hdfs-demo</module>
         <module>map-reduce-demo</module>
+        <module>yarn-demo</module>
     </modules>
 
     <dependencies>
