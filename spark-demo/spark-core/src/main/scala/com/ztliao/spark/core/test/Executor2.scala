@@ -8,10 +8,10 @@ import java.net.ServerSocket
  * @date: 2023/8/13 13:50
  * @description:
  */
-object Executor {
+object Executor2 {
 
   def main(args: Array[String]): Unit = {
-    var server1 = new ServerSocket(9999)
+    var server1 = new ServerSocket(8888)
     println("server start,wait for data")
     val client1 = server1.accept()
     val in1 = client1.getInputStream
