@@ -12,9 +12,10 @@ object Spark10_RDD_Operator_Transform {
   def main(args: Array[String]): Unit = {
     val sparkConf = new SparkConf().setMaster("local[*]").setAppName("RDD")
     val sc = new SparkContext(sparkConf)
-    val rdd = sc.makeRDD(List(1, 2, 3, 4, 5, 6), 4)
-    val newRDD = rdd.coalesce(2, true)
-    newRDD.saveAsTextFile("output")
+    val rdd = sc.makeRDD(List(("1", 1), ("11", 2), ("2", 3)), 2)
+    //val newRDD = rdd.coalesce(3, true)
+    val newRDD = rdd.sortBy(t => t._1.toInt, false)
+    newRDD.collect().foreach(println)
     sc.stop()
   }
 
