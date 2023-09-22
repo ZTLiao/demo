@@ -7,7 +7,7 @@ import org.apache.spark.{SparkConf, SparkContext}
  * @date: 2023/8/20 13:05
  * @description:
  */
-object Spark10_RDD_Operator_Transform {
+object Spark12_RDD_Operator_Transform1 {
 
   def main(args: Array[String]): Unit = {
     val sparkConf = new SparkConf().setMaster("local[*]").setAppName("RDD")
