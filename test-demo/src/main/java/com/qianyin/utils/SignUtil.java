@@ -58,9 +58,8 @@ public class SignUtil {
 
     public static void main(String[] args) {
         Map<String, String> params = new HashMap<>();
-        params.put("pub_timestamp", "1667460047000");
-        params.put("roomUid", "90304899");
-        params.put("uid", "90304899");
+        params.put("hello", "hello,world1!,hello,world2!");
+        params.put("apple", "apple");
         String sign = SignUtil.genSign(params, "1ea53d260ecf11e7b56e00163e046a26");
         System.out.println("sign = " + sign);
         System.out.println("md5 = " + DigestUtils.md5Hex("pub_timestamp=1685517186776&uid=0&key=4r2vskf2267swgksyyg9k6qzdg91axd8").toUpperCase());

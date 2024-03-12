@@ -45,8 +45,8 @@ public class KeyTest {
 //            assert str.equals(str2);
 //        }
 
-        String key = encryptSign("4r2vskf2267swgksyyg9k6qzdg91axdh");
-        System.out.println(decryptSign("n'84iqu735tx6v;quskev6186%6sy29453pu;884r0ky5=xgqv375=cv1gii7xlgt1680r9g60e|>3te6vi8;kz25xw2v375l79s6ggxm74q515nv!vsb40p3vn(=2ku"));
+        //String key = encryptSign("4r2vskf2267swgksyyg9k6qzdg91axdh");
+        System.out.println(decryptSign("5$4wpq4o1y4\"duqc2s5%2r1wb&d6enx3969268sckacba7mt19cz01c2k4n2f7j0i+74b0a02t5e4t07izj'70wk1x3h1u70v4dx418ua4ou40016ui$an47p!0z77333qn$117b9:150t4e14os1mgx5qq'c5852701a0144!r04rhrp0t51hxkr(hv4ogxs7671yvu1vkddw5595x1`r94x6d524ut4346cwb06xedccti170411rzm*4}evb6"));
 //        String str = "{\"data\":200,\"msg\":\"success\"}";
 //        String encrypt = encryptSign(str);
 //        String decrypt = decryptSign(encrypt);

@@ -3,7 +3,9 @@ package com.ztliao.test;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSON;
 import cn.hutool.json.JSONUtil;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -19,30 +21,35 @@ public class FileTest {
 
     public static void main(String[] args) {
         String inputPath = "/Users/liaozetao/Downloads/data.txt";
-        String outputPath = "/Users/liaozetao/Downloads/data4.txt";
-        Set<String> messIds = new HashSet<>();
+        String outputPath = "/Users/liaozetao/Downloads/data1.txt";
         File file = new File(inputPath);
         try (PrintStream printStream = new PrintStream(outputPath);
              InputStreamReader read = new InputStreamReader(Files.newInputStream(file.toPath()), StandardCharsets.UTF_8);
              BufferedReader bufferedReader = new BufferedReader(read)) {
             System.setOut(printStream);
+            int sum = 0;
             if (file.isFile() && file.exists()) {
                 String line;
                 while ((line = bufferedReader.readLine()) != null) {
-                    String giftRecordId = line.split(", giftRecordId:")[1];
-                    String messId = line.split(", giftRecordId:")[0].split(",messId:")[1];
-                    if (messIds.contains(messId)) {
-                        String sql = "insert into temp_gift_send_record_message(mess_id, send_record_id) values('" + messId + "','" + giftRecordId + "');";
-                        System.out.println(sql);
+                    if (StrUtil.isNotEmpty(line)) {
+                        String[] array = line.split("params=");
+                        if (array.length > 1) {
+                            String s = array[1];
+                            if (s.contains(", result=")) {
+                                String[] split = s.split(", result=");
+                                JSONObject jsonObject1 = JSONObject.parseObject(split[0]);
+                                JSONObject jsonObject2 = JSONObject.parseObject(split[1]);
+                                String toAccIdStr = jsonObject1.getString("toAccids");
+                                List<String> strings = JSONArray.parseArray(toAccIdStr, String.class);
+                                String timeTag = jsonObject2.getString("timetag");
+                                for (String toAccId : strings) {
+                                    System.out.println(toAccId + "," + timeTag);
+                                }
+                            }
+                        }
                     }
-                    messIds.add(messId);
-//                    JSONObject jsonObject = JSONObject.parseObject(line);
-//                    String messId = jsonObject.getString("messId");
-//                    if (messIds.contains(messId)) {
-//                        System.out.println(jsonObject.toJSONString());
-//                    }
-//                    messIds.add(messId);
                 }
+                System.out.println(sum);
             }
 //            for (JSONObject value : map.values()) {
 //                String sql = "insert into mq_message(mess_id, message_json) values('" + value.getString("messId") + "','" + value.toJSONString() + "');";
