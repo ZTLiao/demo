@@ -36,7 +36,7 @@ public class EncryptUtil {
     }
 
     public static void main(String[] args) {
-        String des = encryptUseDES("Lzt950124", "1ea53d260ecf11e7b56e00163e046a26");
+        String des = encryptUseDES("123456", "1ea53d260ecf11e7b56e00163e046a26");
         System.out.println(des);
     }
 }
