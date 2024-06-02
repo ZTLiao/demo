@@ -10,6 +10,7 @@ import java.util.Random;
 public class SayTest {
 
     public static void main(String[] args) {
+        System.out.println(System.currentTimeMillis());
         System.out.println(System.nanoTime());
         int sayCount = 0;
         int notSayCount = 0;
