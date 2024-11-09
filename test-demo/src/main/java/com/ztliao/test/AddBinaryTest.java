@@ -1,5 +1,7 @@
 package com.ztliao.test;
 
+import java.util.Properties;
+
 /**
  * @author: liaozetao
  * @date: 2022/2/24 3:11 PM
@@ -8,6 +10,7 @@ package com.ztliao.test;
 public class AddBinaryTest {
 
     public static void main(String[] args) {
+        Properties properties = new Properties();
         String a = "11";
         String b = "1";
         String str = "";
